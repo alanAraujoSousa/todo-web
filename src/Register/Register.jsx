@@ -4,7 +4,7 @@ import { useDispatch, useSelector } from 'react-redux';
 
 import { userActions } from '../_actions';
 
-function RegisterPage() {
+function Register() {
     
     const [user, setUser] = useState({
         name: '',
@@ -72,4 +72,4 @@ function RegisterPage() {
     );
 }
 
-export { RegisterPage };
+export { Register };

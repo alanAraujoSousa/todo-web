@@ -4,7 +4,7 @@ import { useDispatch, useSelector } from 'react-redux';
 
 import { userActions } from '../_actions';
 
-function LoginPage() {
+function Login() {
     const [inputs, setInputs] = useState({
         email: '',
         password: ''
@@ -66,4 +66,4 @@ function LoginPage() {
     );
 } 
 
-export { LoginPage };
+export { Login };
