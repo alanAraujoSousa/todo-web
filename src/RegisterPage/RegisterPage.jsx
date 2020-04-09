@@ -5,12 +5,14 @@ import { useDispatch, useSelector } from 'react-redux';
 import { userActions } from '../_actions';
 
 function RegisterPage() {
+    
     const [user, setUser] = useState({
         name: '',
         email: '',
         password: ''
     });
     const [submitted, setSubmitted] = useState(false);
+
     const registering = useSelector(state => state.registration.registering);
     const dispatch = useDispatch();
 

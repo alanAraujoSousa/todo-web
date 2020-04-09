@@ -1,5 +1,5 @@
-// array in local storage for registered users
 let users = JSON.parse(localStorage.getItem('users')) || [];
+let todos = JSON.parse(localStorage.getItem('todos')) || [];
     
 export function configureFakeBackend() {
     let realFetch = window.fetch;
@@ -21,6 +21,12 @@ export function configureFakeBackend() {
                         return getUsers();
                     case url.match(/\/users\/\d+$/) && method === 'DELETE':
                         return deleteUser();
+                    case url.endsWith('/todos') && method === 'POST':
+                        return createTodo();
+                    case url.endsWith('/todos') && method === 'GET':
+                        return getTodos();
+                    case url.match(/\/todos\/\d+$/) && method === 'DELETE':
+                        return deleteTodo();
                     default:
                         // pass through any requests not handled above
                         return realFetch(url, opts)
@@ -30,7 +36,6 @@ export function configureFakeBackend() {
             }
 
             // route functions
-
             function authenticate() {
                 const { email, password } = body;
                 const user = users.find(x => x.email === email && x.password === password);
@@ -69,6 +74,30 @@ export function configureFakeBackend() {
     
                 users = users.filter(x => x.id !== idFromUrl());
                 localStorage.setItem('users', JSON.stringify(users));
+                return ok();
+            }
+
+            function createTodo() {
+                const todo = body;
+    
+                todo.id = todos.length ? Math.max(...todos.map(x => x.id)) + 1 : 1;
+                todos.push(todo);
+                localStorage.setItem('todos', JSON.stringify(todos));
+
+                return ok(todo);
+            }
+    
+            function getTodos() {
+                if (!isLoggedIn()) return unauthorized();
+
+                return ok(todos);
+            }
+    
+            function deleteTodo() {
+                if (!isLoggedIn()) return unauthorized();
+    
+                todos = todos.filter(x => x.id !== idFromUrl());
+                localStorage.setItem('todos', JSON.stringify(todos));
                 return ok();
             }
 

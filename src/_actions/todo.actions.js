@@ -42,9 +42,9 @@ function getAll() {
             );
     };
 
-    function request() { return { type: todo.GETALL_REQUEST } }
-    function success(todos) { return { type: todo.GETALL_SUCCESS, todos } }
-    function failure(error) { return { type: todo.GETALL_FAILURE, error } }
+    function request() { return { type: todoConstants.GETALL_REQUEST } }
+    function success(todos) { return { type: todoConstants.GETALL_SUCCESS, todos } }
+    function failure(error) { return { type: todoConstants.GETALL_FAILURE, error } }
 }
 
 function _delete(id) {
@@ -58,7 +58,7 @@ function _delete(id) {
             );
     };
 
-    function request(id) { return { type: todo.DELETE_REQUEST, id } }
-    function success(id) { return { type: todo.DELETE_SUCCESS, id } }
-    function failure(id, error) { return { type: todo.DELETE_FAILURE, id, error } }
+    function request(id) { return { type: todoConstants.DELETE_REQUEST, id } }
+    function success(id) { return { type: todoConstants.DELETE_SUCCESS, id } }
+    function failure(id, error) { return { type: todoConstants.DELETE_FAILURE, id, error } }
 }

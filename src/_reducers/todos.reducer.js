@@ -1,13 +1,20 @@
 import { todoConstants } from '../_constants';
 
-export function todos(state = {}, action) {
+const initialTodoState = {
+  items:[]
+}
+
+export function todos(state = initialTodoState, action) {
   switch (action.type) {
     case todoConstants.CREATE_REQUEST:
         return { 
-            creating: true 
+            ...state, creating: true 
         };
     case todoConstants.CREATE_SUCCESS:
-        return {};
+        return {
+          ...state,
+          items: [...state.items, action.todo]
+        };
     case todoConstants.CREATE_FAILURE:
         return {};
     case todoConstants.GETALL_REQUEST:
