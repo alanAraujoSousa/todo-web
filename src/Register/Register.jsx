@@ -61,7 +61,7 @@ function Register() {
                     }
                 </div>
                 <div className="form-group">
-                    <button className="btn btn-primary">
+                    <button disabled={ !user.email || !user.password || !user.name } className="btn btn-primary">
                         {registering && <span className="spinner-border spinner-border-sm mr-1"></span>}
                         Register
                     </button>

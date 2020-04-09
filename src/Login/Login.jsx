@@ -9,8 +9,9 @@ function Login() {
         email: '',
         password: ''
     });
-    const [submitted, setSubmitted] = useState(false);
     const { email, password } = inputs;
+    
+    const [submitted, setSubmitted] = useState(false);
     const loggingIn = useSelector(state => state.authentication.loggingIn);
     const dispatch = useDispatch();
 
@@ -55,7 +56,7 @@ function Login() {
                     }
                 </div>
                 <div className="form-group">
-                    <button className="btn btn-primary">
+                    <button disabled={ !email || !password } className="btn btn-primary">
                         {loggingIn && <span className="spinner-border spinner-border-sm mr-1"></span>}
                         Login
                     </button>
