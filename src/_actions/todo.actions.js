@@ -2,7 +2,7 @@ import { todoConstants } from '../_constants';
 import { todoService } from '../_services';
 import { alertActions } from './';
 
-export const userActions = {
+export const todoActions = {
     create,
     getAll,
     delete: _delete
@@ -13,7 +13,7 @@ function create(todo) {
 
         dispatch(request(todo));
 
-        todoService.register(todo)
+        todoService.create(todo)
             .then(
                 todo => { 
                     dispatch(success(todo));

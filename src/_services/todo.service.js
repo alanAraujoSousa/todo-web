@@ -1,9 +1,8 @@
 import config from 'config';
 import { authHeader } from '../_helpers';
-import { authHeader } from '../_helpers';
 import { userService } from './';
 
-export const userService = {
+export const todoService = {
     create,
     getAll,
     delete: _delete
