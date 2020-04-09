@@ -1,8 +1,10 @@
 import config from 'config';
 
 export const userService = {
-    login
-}
+    login,
+    logout,
+    register,
+};
 
 function login(email, password) {
     const requestOptions = {
@@ -14,9 +16,26 @@ function login(email, password) {
     return fetch(`${config.apiUrl}/users/authenticate`, requestOptions)
         .then(handleResponse)
         .then(user => {
+
+            // For sake of simplicity store the token in localStorage
             localStorage.setItem('user', JSON.stringify(user));
+
             return user;
         });
+}
+
+function logout() {
+    localStorage.removeItem('user');
+}
+
+function register(user) {
+    const requestOptions = {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify(user)
+    };
+
+    return fetch(`${config.apiUrl}/users/register`, requestOptions).then(handleResponse);
 }
 
 function handleResponse(response) {
@@ -36,4 +55,3 @@ function handleResponse(response) {
         return data;
     });
 }
-
